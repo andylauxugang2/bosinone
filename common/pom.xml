@@ -7,10 +7,10 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>user</artifactId>
+    <artifactId>common</artifactId>
     <packaging>jar</packaging>
 
-    <name>user</name>
+    <name>common</name>
     <url>http://maven.apache.org</url>
 
     <properties>
@@ -18,28 +18,28 @@
     </properties>
 
     <dependencies>
+
         <dependency>
-            <groupId>org.springframework.data</groupId>
-            <artifactId>spring-data-redis</artifactId>
+            <groupId>com.caucho</groupId>
+            <artifactId>hessian</artifactId>
+            <version>4.0.7</version>
         </dependency>
+
         <dependency>
             <groupId>redis.clients</groupId>
             <artifactId>jedis</artifactId>
         </dependency>
-        <!-- servlet-api -->
+
         <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
+            <groupId>org.slf4j</groupId>
+            <artifactId>jcl-over-slf4j</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-lang3</artifactId>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
         </dependency>
-        <dependency>
-            <artifactId>common</artifactId>
-            <groupId>com.guangbei</groupId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
+
+
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
