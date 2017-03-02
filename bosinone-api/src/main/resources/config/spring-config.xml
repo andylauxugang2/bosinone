@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans-3.0.xsd"
+       default-autowire="byName" default-lazy-init="true">
+
+    <bean id="propertyConfig" class="com.guangbei.bosinone.core.common.PropertyConfig">
+        <property name="ppdWebSiteUrl" value="${ppd.website.url}"/>
+        <property name="ppdWebSiteValidateCodeUrl" value="${ppd.website.validatecode.url}"/>
+    </bean>
+
+    <!-- 配置动态开关 -->
+    <!--<bean id="bpSwitch" class="com.xx.x.biz.common.BPSwitch"/>-->
+
+</beans>

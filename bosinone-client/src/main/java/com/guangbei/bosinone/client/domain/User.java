@@ -1,4 +1,4 @@
-package com.guangbei.bosinone.domain;
+package com.guangbei.bosinone.client.domain;
 
 /**
  * 数据传输对象 返回给前端

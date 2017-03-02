@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.houbank.bp.repository.db.mybatis.UserBindDAO">
+
+    <resultMap id="userBindResultMap" type="UserBindDO">
+        <id column="id" property="id"/>
+        <result column="user_id" property="userId"/>
+        <result column="username" property="username"/>
+        <result column="mobile" property="mobile"/>
+        <result column="source" property="source"/>
+        <result column="deleted" property="deleted"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+    </resultMap>
+
+    <sql id="user_bind_all_column">
+        id,
+        user_id,
+        username,
+        mobile,
+        source,
+        create_time,
+        update_time
+    </sql>
+
+    <select id="queryById" resultMap="userBindResultMap">
+        select
+        <include refid="user_bind_all_column"/>
+        from t_user_bind
+        where id = #{id} and deleted = 0
+    </select>
+
+    <select id="queryByMobileAndSource" resultMap="userBindResultMap">
+        select
+        <include refid="user_bind_all_column"/>
+        from t_user_bind
+        where mobile = #{mobile} and source = #{source} and deleted = 0
+    </select>
+
+    <select id="queryByUsernameAndSource" resultMap="userBindResultMap">
+        select
+        <include refid="user_bind_all_column"/>
+        from t_user_bind
+        where username = #{username} and source = #{source} and deleted = 0
+    </select>
+
+    <insert id="insertOne" parameterType="userBindDO">
+        <selectKey resultType="long" keyProperty="id" order="AFTER">
+            SELECT last_insert_id() AS id
+        </selectKey>
+        insert into t_user_bind
+        (
+        user_id,
+        username,
+        mobile,
+        source,
+        create_time,
+        update_time
+        )
+        values
+        (
+        #{userId},
+        #{username},
+        #{mobile},
+        #{source},
+        #{createTime},
+        #{updateTime}
+        )
+	</insert>
+</mapper>

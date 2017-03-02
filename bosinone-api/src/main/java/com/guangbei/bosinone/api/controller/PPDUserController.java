@@ -1,8 +1,8 @@
 package com.guangbei.bosinone.api.controller;
 
-import com.guangbei.bosinone.api.domain.param.ppd.PPDLoginParam;
 import com.guangbei.bosinone.api.domain.param.ppd.PPDValidImgCodeParam;
 import com.guangbei.bosinone.api.domain.result.ApiResult;
+import com.guangbei.bosinone.api.domain.param.ppd.PPDLoginParam;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;

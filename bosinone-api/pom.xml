@@ -11,6 +11,16 @@
     <name>bosinone-api Maven Webapp</name>
     <url>http://maven.apache.org</url>
     <dependencies>
+        <dependency>
+            <groupId>com.guangbei</groupId>
+            <artifactId>bosinone-client</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.guangbei</groupId>
+            <artifactId>bosinone-core</artifactId>
+        </dependency>
+
         <!-- springframework -->
         <dependency>
             <groupId>org.springframework</groupId>
@@ -87,7 +97,32 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
+
     <build>
         <finalName>bosinone-api</finalName>
+        <!-- 当filtering开关打开时，使用到的过滤器属性文件列表 -->
+        <filters>
+            <filter>config/common.properties</filter>
+            <filter>config/${build.profile.id}/config.properties</filter>
+        </filters>
+        <sourceDirectory>${basedir}/src/main/java</sourceDirectory>
+        <testSourceDirectory>${basedir}/src/test/java</testSourceDirectory>
+        <!-- 项目相关的所有资源路径列表（属性文件等），这些资源被包含在最终的打包文件里 -->
+        <resources>
+            <!-- 项目相关或测试相关的所有资源路径 -->
+            <resource>
+                <!-- 描述存放资源的目录，相对POM路径 -->
+                <directory>${basedir}/src/main/java</directory>
+                <!-- 排除的模式列表，所有java文件 -->
+                <excludes>
+                    <exclude>**/*.java</exclude>
+                </excludes>
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+                <!-- 处理文件变量替换 -->
+                <filtering>true</filtering>
+            </resource>
+        </resources>
     </build>
 </project>

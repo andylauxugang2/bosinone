@@ -1,4 +1,4 @@
-package com.guangbei.bosinone.webmagictest;
+package com.guangbei.bosinone.core.webmagictest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

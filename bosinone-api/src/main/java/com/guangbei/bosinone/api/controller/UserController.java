@@ -1,10 +1,10 @@
 package com.guangbei.bosinone.api.controller;
 
-import com.guangbei.bosinone.api.domain.UserDTO;
-import com.guangbei.bosinone.api.domain.param.ChangePasswordParam;
 import com.guangbei.bosinone.api.domain.param.LoginParam;
 import com.guangbei.bosinone.api.domain.param.RegisterParam;
 import com.guangbei.bosinone.api.domain.result.ApiResult;
+import com.guangbei.bosinone.api.domain.UserDTO;
+import com.guangbei.bosinone.api.domain.param.ChangePasswordParam;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.RequestBody;

@@ -1,4 +1,4 @@
-package com.guangbei.bosinone.webmagictest;
+package com.guangbei.bosinone.core.webmagictest;
 
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;

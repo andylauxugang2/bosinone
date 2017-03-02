@@ -1,4 +1,4 @@
-package com.guangbei.bosinone.webmagictest;
+package com.guangbei.bosinone.core.webmagictest;
 
 import us.codecraft.webmagic.Spider;
 import us.codecraft.webmagic.monitor.SpiderMonitor;
