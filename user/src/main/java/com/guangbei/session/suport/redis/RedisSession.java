@@ -33,39 +33,31 @@ public class RedisSession implements ExpiredSession {
         this.id = id;
     }
 
-
     @Override
     public String getId() {
-
         return id;
     }
 
     @Override
     public <T> T getAttribute(String attributeName) {
-
         return (T) sessionAttrs.get(attributeName);
     }
 
     @Override
     public Set<String> getAttributeNames() {
-
         return sessionAttrs.keySet();
     }
 
     @Override
     public void setAttribute(String attributeName, Object attributeValue) {
-
         sessionAttrs.put(attributeName, attributeValue);
         changeAttrs.put(HttpConstants.SESSION_ATTR_PREFIX + attributeName, attributeValue);
-
     }
 
     @Override
     public void removeAttribute(String attributeName) {
-
         sessionAttrs.remove(attributeName);
         changeAttrs.remove(HttpConstants.SESSION_ATTR_PREFIX + attributeName);
-
     }
 
     @Override
@@ -86,7 +78,6 @@ public class RedisSession implements ExpiredSession {
     @Override
     public void setExpiredSeconds(int expiredTime) {
         this.expiredTime = expiredTime;
-
     }
 
     @Override
@@ -99,8 +90,7 @@ public class RedisSession implements ExpiredSession {
         if (expiredTime < 0) {
             return false;
         }
-        return (TimeUnit.SECONDS.toMillis(expiredTime) + lastAccessedTime) <= System
-                .currentTimeMillis();
+        return (TimeUnit.SECONDS.toMillis(expiredTime) + lastAccessedTime) <= System.currentTimeMillis();
     }
 
     @Override
@@ -108,11 +98,9 @@ public class RedisSession implements ExpiredSession {
         this.creationTime = creationTime;
     }
 
-
     public boolean isFirst() {
         return isFirst;
     }
-
 
     public boolean isDelete() {
         return delete;
@@ -126,9 +114,7 @@ public class RedisSession implements ExpiredSession {
         this.isFirst = isFirst;
     }
 
-
     public boolean equals(Object obj) {
-
         return (obj instanceof Session) && id.equals(((Session) obj).getId());
     }
 
@@ -137,16 +123,13 @@ public class RedisSession implements ExpiredSession {
         return id.hashCode();
     }
 
-
     public Map<String, Object> getChangeAttrs() {
         return changeAttrs;
     }
 
-
     public void setChangeAttrs(Map<String, Object> changeAttrs) {
         this.changeAttrs = changeAttrs;
     }
-
 
     public long getOriginalLastAccessTime() {
         return originalLastAccessTime;
@@ -161,18 +144,14 @@ public class RedisSession implements ExpiredSession {
         this.id = sessionId;
     }
 
-
-    public void handlClientStore(HttpServletResponse response) {
-
+    public void handleClientStore(HttpServletResponse response) {
         if (HttpConstants.FILTER_COOKIE.equals(getAttribute(HttpConstants.HEADER__FILTER_KEY))) {
             HttpStrategyUtil.cookieStrategy.createSession(this, null, response);
         }
         if (HttpConstants.FILTER_HEADER.equals(getAttribute(HttpConstants.HEADER__FILTER_KEY))) {
             HttpStrategyUtil.headerStrategy.createSession(this, null, response);
         }
-
     }
-
 
     public void cleanClientStore() {
         removeAttribute(HttpConstants.HEADER__FILTER_KEY);

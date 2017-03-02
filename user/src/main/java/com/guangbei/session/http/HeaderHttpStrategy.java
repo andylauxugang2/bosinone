@@ -12,13 +12,11 @@ public class HeaderHttpStrategy implements HttpStrategy {
 
     @Override
     public String getRequestedSessionId(HttpServletRequest request) {
-
         return request.getHeader(headerName);
     }
 
     @Override
-    public void createSession(Session session, HttpServletRequest request,
-                              HttpServletResponse response) {
+    public void createSession(Session session, HttpServletRequest request, HttpServletResponse response) {
         response.setHeader(headerName, session.getId());
     }
 

@@ -12,14 +12,13 @@ import java.util.List;
 @SuppressWarnings("static-access")
 public class CookieSerializer {
 
-    public static String cookieName;
+    public static String cookieName = HttpConstants.COOKIE_NAME;
 
     public static String cookiePath = HttpConstants.COOKIE_PATH;
 
     public static Integer cookieMaxAge = -1;
 
     public static String domainName;
-
 
     public static List<String> readCookieValues(HttpServletRequest request) {
         Cookie cookies[] = request.getCookies();
@@ -62,16 +61,13 @@ public class CookieSerializer {
         this.cookieName = cookieName;
     }
 
-
     public void setCookieMaxAge(int cookieMaxAge) {
         this.cookieMaxAge = cookieMaxAge;
     }
-
 
     public void setDomainName(String domainName) {
 
         this.domainName = domainName;
     }
-
 
 }

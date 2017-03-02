@@ -31,7 +31,6 @@ public class JedisFactory {
 
 
     public void init() {
-
         jedisPool = new JedisPool(jedisPoolConfig, host, port, timeOut, password);
         Jedis jedis = jedisPool.getResource();
         if (null == jedis || !("PONG".equals(jedis.ping()))) {

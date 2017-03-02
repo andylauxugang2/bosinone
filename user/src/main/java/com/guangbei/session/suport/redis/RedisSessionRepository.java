@@ -4,17 +4,15 @@ import com.guangbei.common.redis.JedisTemple;
 import com.guangbei.session.SessionRepository;
 import com.guangbei.session.utils.HttpConstants;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class RedisSessionRepository implements SessionRepository<RedisSession> {
 
-    @Autowired
     private JedisTemple jedisTemple;
 
-    static final String DEFAULT_SESSION_REDIS_PREFIX = "houbank:session:";
+    static final String DEFAULT_SESSION_REDIS_PREFIX = "user:session:";
 
     static final String CREATE_TIME = "createTime";
 
@@ -24,7 +22,7 @@ public class RedisSessionRepository implements SessionRepository<RedisSession> {
 
     private String appName;
 
-    private Integer maxIntervalTime = 1800;
+    private Integer maxIntervalTime = 1800; //3 hours
 
     public RedisSessionRepository(JedisTemple jedisTemple) {
         this.jedisTemple = jedisTemple;
@@ -32,7 +30,6 @@ public class RedisSessionRepository implements SessionRepository<RedisSession> {
 
     @Override
     public RedisSession createSession() {
-
         RedisSession session = new RedisSession();
         session.setFirst(true);
         session.setExpiredSeconds(maxIntervalTime);
@@ -41,15 +38,12 @@ public class RedisSessionRepository implements SessionRepository<RedisSession> {
 
     @Override
     public void save(RedisSession redisSession) {
-
         flush(redisSession);
         redisSession.setFirst(false);
-
     }
 
     @Override
     public RedisSession getSession(String sessionId) {
-
         return getSession(sessionId, true);
     }
 
@@ -89,13 +83,12 @@ public class RedisSessionRepository implements SessionRepository<RedisSession> {
         return redisSession;
     }
 
-
     private void flush(RedisSession redisSession) {
 
         Map<String, Object> attrs = redisSession.getChangeAttrs();
         jedisTemple.hmset(getSessionKey(redisSession.getId()), attrs, (maxIntervalTime + 10 * 60));
 
-        redisSession.setChangeAttrs(new HashMap<String, Object>());
+        redisSession.setChangeAttrs(new HashMap<>());
     }
 
     private String getSessionKey(String sessionId) {
@@ -103,7 +96,6 @@ public class RedisSessionRepository implements SessionRepository<RedisSession> {
         if (StringUtils.isNotBlank(appName)) sessionKey += appName;
         return (sessionKey + sessionId);
     }
-
 
     public Integer getMaxIntervalTime() {
         return maxIntervalTime;

@@ -6,29 +6,22 @@ public class ParamError extends RuntimeException {
 
     public ParamError() {
         super();
-
     }
 
     public ParamError(String message, Throwable cause,
                       boolean enableSuppression, boolean writableStackTrace) {
         super(message, cause, enableSuppression, writableStackTrace);
-
     }
 
     public ParamError(String message, Throwable cause) {
         super(message, cause);
-
     }
 
     public ParamError(String message) {
         super(message);
-
     }
 
     public ParamError(Throwable cause) {
         super(cause);
-
     }
-
-
 }

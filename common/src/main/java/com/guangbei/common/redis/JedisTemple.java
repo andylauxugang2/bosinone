@@ -13,7 +13,7 @@ import java.util.Map;
 public class JedisTemple {
 
     private static final Logger logger = LoggerFactory.getLogger(JedisTemple.class);
-    
+
     final String SUCEES = "OK";
 
     private JedisFactory jedisFactory;

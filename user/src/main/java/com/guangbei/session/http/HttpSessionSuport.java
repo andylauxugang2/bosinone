@@ -10,22 +10,17 @@ import java.util.Set;
 
 public class HttpSessionSuport {
 
-
     private static ThreadLocal<RedisSession> threadLocal = new ThreadLocal<>();
 
-
     public static void set(RedisSession redisSession) {
-
         threadLocal.set(redisSession);
     }
 
     public static RedisSession get() {
-
         return threadLocal.get();
     }
 
     public static void clear() {
-
         threadLocal.set(null);
     }
 
@@ -42,9 +37,7 @@ public class HttpSessionSuport {
     }
 
     public static void setAttribute(String attributeName, Object attributeValue) {
-        if (StringUtils.isBlank(attributeName)
-                || attributeValue == null
-                ) {
+        if (StringUtils.isBlank(attributeName) || attributeValue == null) {
             throw new ParamError(ErrorMessageConstants.PARRAM_ERROR);
         }
         RedisSession redisSession = get();
@@ -75,7 +68,7 @@ public class HttpSessionSuport {
     public static void setSessionId(String sessionId, HttpServletResponse response) {
         RedisSession redisSession = get();
         redisSession.setSessionId(sessionId);
-        redisSession.handlClientStore(response);
+        redisSession.handleClientStore(response);
     }
 
     public static void delSession() {

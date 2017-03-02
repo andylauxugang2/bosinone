@@ -37,34 +37,29 @@ public class HttpSessionFilter implements Filter {
             if (HttpConstants.FILTER_COOKIE.equals(filterValue.trim())) {
                 sessionId = HttpStrategyUtil.cookieStrategy.getRequestedSessionId(req);
             }
-            // filter-header
+            // filter-header 从request header中获取 token=sessionId
             if (HttpConstants.FILTER_HEADER.equals(filterValue.trim())) {
                 sessionId = HttpStrategyUtil.headerStrategy.getRequestedSessionId(req);
             }
             if (StringUtils.isNotBlank(sessionId)) {
-
                 redisSession = redisSessionRepository.getSession(sessionId);
             }
             if (StringUtils.isBlank(sessionId) || redisSession == null) {
-
                 redisSession = redisSessionRepository.createSession();
             }
             HttpSessionSuport.set(redisSession);
             HttpSessionSuport.setAttribute(HttpConstants.HEADER__FILTER_KEY, filterValue);
-            redisSession.handlClientStore(rep);
+            redisSession.handleClientStore(rep);
             chain.doFilter(req, rep);
             // 提交session数据
-            commitSession(filterValue, HttpSessionSuport.get(), req, rep);
-
+            commitSession(HttpSessionSuport.get(), req, rep);
         } else {
             chain.doFilter(request, response);
         }
 
     }
 
-    private void commitSession(String filterValue, RedisSession session, HttpServletRequest request,
-                               HttpServletResponse response) {
-
+    private void commitSession(RedisSession session, HttpServletRequest request, HttpServletResponse response) {
         session.cleanClientStore();
         if (null != session && session.getChangeAttrs().size() > 0) {
             if (session.isFirst()) {
