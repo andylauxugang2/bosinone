@@ -17,8 +17,8 @@
 
     <bean id="jedisFactory" class="com.guangbei.common.redis.JedisFactory" init-method="init" destroy-method="destory">
         <property name="jedisPoolConfig" ref="jedisPoolConfig"/>
-        <property name="host" value="${redis.host}"/>
-        <property name="port" value="${redis.port}"/>
+        <property name="host" value="${bosinone.redis.host}"/>
+        <property name="port" value="${bosinone.redis.port}"/>
     </bean>
 
     <bean id="jedisTemple" class="com.guangbei.common.redis.JedisTemple">

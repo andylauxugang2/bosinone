@@ -20,6 +20,9 @@
 		<property name="defaultAutoCommit" value="${bosinone.cpool.defaultAutoCommit}" />
 		<property name="timeBetweenEvictionRunsMillis" value="${bosinone.cpool.timeBetweenEvictionRunsMillis}"/>
 		<property name="minEvictableIdleTimeMillis" value="${bosinone.cpool.minEvictableIdleTimeMillis}"/>
+		<property name="validationQuery">
+			<value>select 1 from dual</value>
+		</property>
 	</bean>
 
 </beans>

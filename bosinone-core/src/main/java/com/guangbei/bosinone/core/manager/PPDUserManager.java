@@ -16,6 +16,6 @@ public interface PPDUserManager {
      * @return
      * @throws PPDException
      */
-    PPDGetValidateCode getValidateCode(Integer userId) throws PPDException;
+    PPDGetValidateCode getValidateCode(Long userId) throws PPDException;
 
 }

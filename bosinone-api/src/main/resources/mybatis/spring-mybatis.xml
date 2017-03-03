@@ -33,23 +33,6 @@
     <!-- 开启本地注解事务 -->
     <tx:annotation-driven proxy-target-class="true" transaction-manager="localTransactionManager"/>
 
-    <aop:aspectj-autoproxy/>
-
-    <aop:config>
-        <aop:pointcut id="localAppService" expression="execution(* com.guangbei.bosinone.core.service..*Service*.*(..))"/>
-        <aop:advisor advice-ref="localTxAdvice" pointcut-ref="localAppService"/>
-    </aop:config>
-
-    <tx:advice id="localTxAdvice" transaction-manager="localTransactionManager">
-        <tx:attributes>
-            <tx:method name="select*" read-only="true"/>
-            <tx:method name="find*" read-only="true"/>
-            <tx:method name="get*" read-only="true"/>
-            <tx:method name="query*" read-only="true"/>
-            <tx:method name="*"/>
-        </tx:attributes>
-    </tx:advice>
-
     <!-- Mapper接口所在包名，Spring会自动查找其下的Mapper -->
     <bean id="mapperScannerConfigurer" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>

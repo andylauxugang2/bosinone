@@ -10,7 +10,7 @@ public abstract class BaseParam implements Serializable {
     private String sourceIp;
     private String operator;
     private Long requestTime;
-    private Integer userId;
+    private Long userId;
 
     public String getSourceIp() {
         return sourceIp;
@@ -36,11 +36,11 @@ public abstract class BaseParam implements Serializable {
         this.requestTime = requestTime;
     }
 
-    public Integer getUserId() {
+    public Long getUserId() {
         return userId;
     }
 
-    public void setUserId(Integer userId) {
+    public void setUserId(Long userId) {
         this.userId = userId;
     }
 }

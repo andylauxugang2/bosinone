@@ -4,67 +4,54 @@
 
 <mapper namespace="com.houbank.bp.repository.db.mybatis.UserBindDAO">
 
-    <resultMap id="userBindResultMap" type="UserBindDO">
+    <resultMap id="userResultMap" type="User">
         <id column="id" property="id"/>
-        <result column="user_id" property="userId"/>
-        <result column="username" property="username"/>
+        <result column="login_id" property="loginId"/>
+        <result column="password" property="password"/>
         <result column="mobile" property="mobile"/>
-        <result column="source" property="source"/>
+        <result column="username" property="username"/>
         <result column="deleted" property="deleted"/>
         <result column="create_time" property="createTime"/>
         <result column="update_time" property="updateTime"/>
     </resultMap>
 
-    <sql id="user_bind_all_column">
+    <sql id="user_all_column">
         id,
-        user_id,
-        username,
+        login_id,
+        password,
         mobile,
-        source,
+        username,
+        deleted,
         create_time,
         update_time
     </sql>
 
-    <select id="queryById" resultMap="userBindResultMap">
+    <select id="selectById" resultMap="userResultMap">
         select
-        <include refid="user_bind_all_column"/>
-        from t_user_bind
-        where id = #{id} and deleted = 0
+        <include refid="user_all_column"/>
+        from t_user
+        where id = #{id}
     </select>
 
-    <select id="queryByMobileAndSource" resultMap="userBindResultMap">
-        select
-        <include refid="user_bind_all_column"/>
-        from t_user_bind
-        where mobile = #{mobile} and source = #{source} and deleted = 0
-    </select>
-
-    <select id="queryByUsernameAndSource" resultMap="userBindResultMap">
-        select
-        <include refid="user_bind_all_column"/>
-        from t_user_bind
-        where username = #{username} and source = #{source} and deleted = 0
-    </select>
-
-    <insert id="insertOne" parameterType="userBindDO">
+    <insert id="insertOne" parameterType="User">
         <selectKey resultType="long" keyProperty="id" order="AFTER">
             SELECT last_insert_id() AS id
         </selectKey>
-        insert into t_user_bind
+        insert into t_user
         (
-        user_id,
-        username,
+        login_id,
+        password,
         mobile,
-        source,
+        username,
         create_time,
         update_time
         )
         values
         (
-        #{userId},
-        #{username},
+        #{loginId},
+        #{password},
         #{mobile},
-        #{source},
+        #{username},
         #{createTime},
         #{updateTime}
         )
