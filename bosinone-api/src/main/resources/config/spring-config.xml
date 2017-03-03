@@ -8,6 +8,8 @@ http://www.springframework.org/schema/beans/spring-beans-3.0.xsd"
     <bean id="propertyConfig" class="com.guangbei.bosinone.core.common.PropertyConfig">
         <property name="ppdWebSiteUrl" value="${ppd.website.url}"/>
         <property name="ppdWebSiteValidateCodeUrl" value="${ppd.website.validatecode.url}"/>
+        <property name="ppdWebSiteCheckValidateCodeUrl" value="${ppd.website.checkvalidatecode.url}"/>
+        <property name="ppdWebSiteLoginUrl" value="${ppd.website.login.url}"/>
     </bean>
 
     <!-- 配置动态开关 -->

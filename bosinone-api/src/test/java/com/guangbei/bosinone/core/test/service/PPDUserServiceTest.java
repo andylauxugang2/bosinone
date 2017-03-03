@@ -1,6 +1,8 @@
 package com.guangbei.bosinone.core.test.service;
 
 import com.guangbei.bosinone.client.param.PPDGetValidCodeParam;
+import com.guangbei.bosinone.client.param.PPDLoginParam;
+import com.guangbei.bosinone.client.param.PPDValidCodeParam;
 import com.guangbei.bosinone.client.result.PPDUserResult;
 import com.guangbei.bosinone.core.service.PPDUserService;
 import org.junit.Test;
@@ -33,6 +35,31 @@ public class PPDUserServiceTest {
         logger.info("test result={}", result.toString());
         if(result.isSuccess()){
             Files.write(Paths.get("/Users/xugang/Desktop/image.jpg"), result.getValidCode());
+        }
+    }
+
+    @Test
+    public void test_checkValidateCode() throws Exception {
+        PPDValidCodeParam param = new PPDValidCodeParam();
+        param.setUserId(1L);
+        param.setValidCode("1660");
+        PPDUserResult result = ppdUserService.checkValidateCode(param);
+        logger.info("test result={}", result.toString());
+    }
+
+    @Test
+    public void test_login() throws Exception {
+        PPDLoginParam param = new PPDLoginParam();
+        param.setUserId(1L);
+        param.setUserName("18611410103");
+        param.setPassword("xugang03");
+        param.setRememberMe(false);
+        param.setValidateCode(null);
+        PPDUserResult result = ppdUserService.login(param);
+        logger.info("test result={}", result.toString());
+        if(result.isSuccess()){
+            logger.info("test result PpDaiUniqueId={}", result.getPpdLoginResult().getPpDaiUniqueId());
+            logger.info("test result Redirect={}", result.getPpdLoginResult().getRedirect());
         }
     }
 }

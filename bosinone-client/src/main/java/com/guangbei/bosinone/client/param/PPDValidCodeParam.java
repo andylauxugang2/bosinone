@@ -1,10 +1,11 @@
-package com.guangbei.bosinone.api.domain.param.ppd;
+package com.guangbei.bosinone.client.param;
 
 /**
- * 拍拍贷 验证登录验证码参数
- * Created by xugang on 2017/3/1.
+ * Created by xugang on 16/11/2.
  */
-public class PPDValidImgCodeParam {
+public class PPDValidCodeParam extends PPDParam {
+    private static final long serialVersionUID = -5245959038010912359L;
+
     private String validCode;
 
     public String getValidCode() {

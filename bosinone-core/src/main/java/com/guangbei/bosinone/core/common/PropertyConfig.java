@@ -20,6 +20,16 @@ public class PropertyConfig implements Serializable {
      */
     private String ppdWebSiteValidateCodeUrl = "ValidateCode/Image";
 
+    /**
+     * 获取登录 接口地址
+     */
+    private String ppdWebSiteLoginUrl = "User/Login";
+
+    /**
+     * 验证登录验证码 接口地址
+     */
+    private String ppdWebSiteCheckValidateCodeUrl = "registercheck";
+
     public String getPpdWebSiteUrl() {
         return ppdWebSiteUrl;
     }
@@ -34,5 +44,21 @@ public class PropertyConfig implements Serializable {
 
     public void setPpdWebSiteValidateCodeUrl(String ppdWebSiteValidateCodeUrl) {
         this.ppdWebSiteValidateCodeUrl = ppdWebSiteValidateCodeUrl;
+    }
+
+    public String getPpdWebSiteCheckValidateCodeUrl() {
+        return ppdWebSiteCheckValidateCodeUrl;
+    }
+
+    public void setPpdWebSiteCheckValidateCodeUrl(String ppdWebSiteCheckValidateCodeUrl) {
+        this.ppdWebSiteCheckValidateCodeUrl = ppdWebSiteCheckValidateCodeUrl;
+    }
+
+    public String getPpdWebSiteLoginUrl() {
+        return ppdWebSiteLoginUrl;
+    }
+
+    public void setPpdWebSiteLoginUrl(String ppdWebSiteLoginUrl) {
+        this.ppdWebSiteLoginUrl = ppdWebSiteLoginUrl;
     }
 }

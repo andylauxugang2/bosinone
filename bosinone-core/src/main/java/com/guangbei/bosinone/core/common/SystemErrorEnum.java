@@ -9,7 +9,8 @@ public enum SystemErrorEnum {
 
     SYSTEM_ERROR("SYSTEM001", "非常抱歉，系统异常，请您稍后再试"),
     PARAM_IS_NOT_VALIDATE_ERROR("SYSTEM002", "您输入的参数有误,请重新输入"),
-    PARAM_IS_NOT_VALIDATE_FORMAT_ERROR("SYSTEM003", "您输入的参数[%s]有误,请重新输入");
+    PARAM_IS_NOT_VALIDATE_FORMAT_ERROR("SYSTEM003", "您输入的参数[%s]有误,请重新输入"),
+    EXTERNAL_INTERFACE_ERROR("SYSTEM004", "非常抱歉，系统异常，请您稍后再试");
 
     private String errorCode;
     private String errorMsg;

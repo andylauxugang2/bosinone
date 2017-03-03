@@ -17,7 +17,25 @@ http://www.springframework.org/schema/beans/spring-beans-3.0.xsd"
     <bean id="httpClientBuilder" class="org.apache.http.impl.client.HttpClientBuilder"
           factory-method="create">
         <property name="connectionManager" ref="pollingConnectionManager"/>
+        <property name="keepAliveStrategy" ref="connectionKeepAliveStrategy"/>
+        <property name="defaultHeaders">
+            <list>
+                <bean class="org.apache.http.message.BasicHeader">
+                    <constructor-arg index="0" value="User-Agent" />
+                    <constructor-arg index="1" value="Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/31.0.1650.16 Safari/537.36" />
+                </bean>
+                <bean class="org.apache.http.message.BasicHeader">
+                    <constructor-arg index="0" value="Accept-Language" />
+                    <constructor-arg index="1" value="zh-CN" />
+                </bean>
+                <bean class="org.apache.http.message.BasicHeader">
+                    <constructor-arg index="0" value="Connection" />
+                    <constructor-arg index="1" value="Keep-Alive" />
+                </bean>
+            </list>
+        </property>
     </bean>
+    <bean id="connectionKeepAliveStrategy" class="org.apache.http.impl.client.DefaultConnectionKeepAliveStrategy"/>
 
     <bean id="httpClient" factory-bean="httpClientBuilder"
           factory-method="build"/>

@@ -2,13 +2,13 @@ package com.guangbei.bosinone.api.domain.param.ppd;
 
 /**
  * 拍拍贷 登录参数
+ * 用户密码登录方式
  * Created by xugang on 2017/3/1.
  */
-public class PPDLoginParam {
+public class PPDCommLoginParam {
     private String username;//已绑定手机/用户名/邮箱
     private String password;//密码
     private boolean rememberMe; //记住我
-
     private String validateCode;//验证码 密码输入错误过多 提示 存在风险，需要校验图片验证码
 
     public String getUsername() {
