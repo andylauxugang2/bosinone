@@ -30,10 +30,10 @@ public class PPDUserServiceTest {
     @Test
     public void test_getValidateCode() throws Exception {
         PPDGetValidCodeParam ppdGetValidCodeParam = new PPDGetValidCodeParam();
-        ppdGetValidCodeParam.setUserId(1L);
+        ppdGetValidCodeParam.setUserId(2L);
         PPDUserResult result = ppdUserService.getValidateCode(ppdGetValidCodeParam);
         logger.info("test result={}", result.toString());
-        if(result.isSuccess()){
+        if (result.isSuccess()) {
             Files.write(Paths.get("/Users/xugang/Desktop/image.jpg"), result.getValidCode());
         }
     }
@@ -41,8 +41,8 @@ public class PPDUserServiceTest {
     @Test
     public void test_checkValidateCode() throws Exception {
         PPDValidCodeParam param = new PPDValidCodeParam();
-        param.setUserId(1L);
-        param.setValidCode("1660");
+        param.setUserId(2L);
+        param.setValidCode("4403");
         PPDUserResult result = ppdUserService.checkValidateCode(param);
         logger.info("test result={}", result.toString());
     }
@@ -50,16 +50,34 @@ public class PPDUserServiceTest {
     @Test
     public void test_login() throws Exception {
         PPDLoginParam param = new PPDLoginParam();
-        param.setUserId(1L);
-        param.setUserName("18611410103");
-        param.setPassword("xugang03");
+        param.setUserId(2L);
+        param.setUserName("13313066864");
+        param.setPassword("g");
         param.setRememberMe(false);
         param.setValidateCode(null);
         PPDUserResult result = ppdUserService.login(param);
         logger.info("test result={}", result.toString());
-        if(result.isSuccess()){
+        if (result.isSuccess()) {
             logger.info("test result PpDaiUniqueId={}", result.getPpdLoginResult().getPpDaiUniqueId());
             logger.info("test result Redirect={}", result.getPpdLoginResult().getRedirect());
+        }
+    }
+
+    @Test
+    public void test_manyloginPasswordErrorFail() throws Exception {
+        PPDLoginParam param = new PPDLoginParam();
+        param.setUserId(2L);
+        param.setUserName("13313066864");
+        param.setPassword("g");
+        param.setRememberMe(false);
+        param.setValidateCode(null);
+        for (int i = 0; i < 10; i++) {
+            PPDUserResult result = ppdUserService.login(param);
+            logger.info("test result={}", result.toString());
+            if (result.isSuccess()) {
+                logger.info("test result PpDaiUniqueId={}", result.getPpdLoginResult().getPpDaiUniqueId());
+                logger.info("test result Redirect={}", result.getPpdLoginResult().getRedirect());
+            }
         }
     }
 }

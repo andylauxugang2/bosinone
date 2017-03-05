@@ -9,7 +9,7 @@ import com.guangbei.bosinone.core.common.http.param.AbstractParamMap;
 public class PPDLoginRequest extends AbstractParamMap {
     private String userName; //18611410103
     private String password;
-    private String ssAsync = "true";
+    private String isAsync = "true";
     private String rememberMe;
     private String validateCode;
 
@@ -31,13 +31,13 @@ public class PPDLoginRequest extends AbstractParamMap {
         this.password = password;
     }
 
-    @JsonProperty(value = "IsAsync")
-    public String getSsAsync() {
-        return ssAsync;
+    @JsonProperty(value = "isAsync")
+    public String getIsAsync() {
+        return isAsync;
     }
 
-    public void setSsAsync(String ssAsync) {
-        this.ssAsync = ssAsync;
+    public void setIsAsync(String isAsync) {
+        this.isAsync = isAsync;
     }
 
     @JsonProperty(value = "RememberMe")

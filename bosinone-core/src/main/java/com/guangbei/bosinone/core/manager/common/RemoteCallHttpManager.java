@@ -39,17 +39,17 @@ public abstract class RemoteCallHttpManager {
     }
 
     @Retryable(maxAttempts = 3, backoff = @Backoff(delay = 2000))
-    protected <T> ResponseEntity<T> callRetry(String url, Map<String, Object> paramMap, HttpMethod method, ParameterizedTypeReference<T> responseType, Object... uriVariables) throws Exception {
+    protected <T> ResponseEntity<T> callRetry(String url, Map<String, Object> paramMap, HttpMethod method, ParameterizedTypeReference<T> responseType, HttpHeaders headers, Object... uriVariables) throws Exception {
         //抛出任何Exception都会重试，直到策略终止，调用recoveryCallback
-        ResponseEntity<T> result = retryTemplate.execute(context -> call(url, paramMap, method, responseType, uriVariables));
+        ResponseEntity<T> result = retryTemplate.execute(context -> call(url, paramMap, method, responseType, headers, uriVariables));
         return result;
     }
 
-    protected <T> ResponseEntity<T> call(String url, Map<String, Object> paramMap, HttpMethod method, ParameterizedTypeReference<T> responseType, Object... uriVariables) throws Exception {
+    protected <T> ResponseEntity<T> call(String url, Map<String, Object> paramMap, HttpMethod method, ParameterizedTypeReference<T> responseType, HttpHeaders headers, Object... uriVariables) throws Exception {
         LocalDateTime startDateTime = LocalDateTime.now();
         MultiValueMap<String, Object> param = new LinkedMultiValueMap<>();
         param.setAll(paramMap);
-        HttpEntity<MultiValueMap<String, Object>> httpEntity = new HttpEntity<>(param);
+        HttpEntity<MultiValueMap<String, Object>> httpEntity = new HttpEntity<>(param, headers);
         ResponseEntity<T> result = getRestTemplate().exchange(url, method, httpEntity, responseType, uriVariables);
         //埋点请求花费时间
         LocalDateTime endDateTime = LocalDateTime.now();
@@ -59,6 +59,7 @@ public abstract class RemoteCallHttpManager {
 
     /**
      * 获取resttemplate对象,根据子类设置为特定类型,比如notSSL的https和http等
+     *
      * @return
      */
     public abstract RestTemplate getRestTemplate();

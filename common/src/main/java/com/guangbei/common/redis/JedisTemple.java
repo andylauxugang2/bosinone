@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import redis.clients.jedis.Jedis;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class JedisTemple {
@@ -244,4 +245,36 @@ public class JedisTemple {
         return result;
     }
 
+    public boolean lpush(String key, List<String> list, Integer expiredTime) {
+        boolean result = false;
+        Jedis jedis = null;
+        if (list == null || (list.size() == 0)) return false;
+        try {
+            jedis = jedisFactory.getSource();
+            for (String item : list) {
+                jedis.lpush(key, item);
+            }
+            if (expiredTime != null)
+                jedis.expire(key, expiredTime);
+        } catch (Exception e) {
+            logger.error("redis lpush error, key:{}" + key + ",field," + list, e);
+        } finally {
+            if (jedis != null) jedis.close();
+        }
+        return result;
+    }
+
+    public List<String> lrangeAll(String key) {
+        List<String> result = null;
+        Jedis jedis = null;
+        try {
+            jedis = jedisFactory.getSource();
+            result = jedis.lrange(key, 0, -1);
+        } catch (Exception e) {
+            logger.error("redis lrangeAll error, key:{}" + key, e);
+        } finally {
+            if (jedis != null) jedis.close();
+        }
+        return result;
+    }
 }
