@@ -50,9 +50,9 @@ public class PPDUserServiceTest {
     @Test
     public void test_login() throws Exception {
         PPDLoginParam param = new PPDLoginParam();
-        param.setUserId(2L);
-        param.setUserName("13313066864");
-        param.setPassword("g");
+        param.setUserId(3L);
+        param.setUserName("18618122260");
+        param.setPassword("xialei030");
         param.setRememberMe(false);
         param.setValidateCode(null);
         PPDUserResult result = ppdUserService.login(param);

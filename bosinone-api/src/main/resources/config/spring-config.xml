@@ -12,6 +12,10 @@ http://www.springframework.org/schema/beans/spring-beans-3.0.xsd"
         <property name="ppdWebSiteLoginUrl" value="${ppd.website.login.url}"/>
     </bean>
 
+    <bean id="ppdWirelessAPIPropertyConfig" class="com.guangbei.bosinone.core.common.PPDWirelessAPIPropertyConfig">
+        <property name="personalloanListUrl" value="${personalloan.list.url}"/>
+    </bean>
+
     <!-- 配置动态开关 -->
     <!--<bean id="bpSwitch" class="com.xx.x.biz.common.BPSwitch"/>-->
 

@@ -117,6 +117,7 @@
         <filters>
             <filter>config/common.properties</filter>
             <filter>config/${build.profile.id}/config.properties</filter>
+            <filter>config/${build.profile.id}/ppdwirelessapi.properties</filter>
         </filters>
         <sourceDirectory>${basedir}/src/main/java</sourceDirectory>
         <testSourceDirectory>${basedir}/src/test/java</testSourceDirectory>

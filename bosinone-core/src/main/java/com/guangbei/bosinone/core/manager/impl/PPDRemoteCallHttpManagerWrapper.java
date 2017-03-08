@@ -1,4 +1,4 @@
-package com.guangbei.bosinone.core.manager;
+package com.guangbei.bosinone.core.manager.impl;
 
 import com.guangbei.bosinone.core.manager.common.RemoteCallHttpManager;
 import org.slf4j.Logger;

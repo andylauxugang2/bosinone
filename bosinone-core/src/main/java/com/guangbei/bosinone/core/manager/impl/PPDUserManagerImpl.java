@@ -1,8 +1,9 @@
-package com.guangbei.bosinone.core.manager;
+package com.guangbei.bosinone.core.manager.impl;
 
 import com.guangbei.bosinone.core.common.Constants;
 import com.guangbei.bosinone.core.common.PropertyConfig;
 import com.guangbei.bosinone.core.common.SystemErrorEnum;
+import com.guangbei.bosinone.core.manager.PPDUserManager;
 import com.guangbei.bosinone.core.manager.exception.PPDException;
 import com.guangbei.bosinone.core.manager.model.*;
 import com.guangbei.common.redis.JedisTemple;
