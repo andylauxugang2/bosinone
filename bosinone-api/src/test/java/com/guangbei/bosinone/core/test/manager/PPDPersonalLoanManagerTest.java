@@ -27,8 +27,25 @@ public class PPDPersonalLoanManagerTest {
         Long userId = 1L;
         String ppduname = "pdutest1";
         PPDWirelessGetPersonalLoanListRequest request = new PPDWirelessGetPersonalLoanListRequest();
+        request.setLoanCategory(8);
+        request.setPageIndex(1);
+        request.setPageSize(20);
         PPDWirelessGetPersonalLoanListResponse response = ppdPersonalLoanManager.bidProductList(userId, ppduname, request);
         logger.info("test response={}", response);
+
+        if (response.getResult() == -1) {
+            return;
+        }
+
+        //一个线程 按页读 比较慢 多个线程分页读 比较快 但要注意去重
+        logger.info("总标的个数:{}", response.getBidProductCount());
+        while (request.getPageIndex() * request.getPageSize() < response.getBidProductCount()) {
+            //继续获取
+            request.setPageIndex(request.getPageIndex() + 1);
+            response = ppdPersonalLoanManager.bidProductList(userId, ppduname, request);
+            logger.info("总标的个数:{}", response.getBidProductCount());
+        }
+
     }
 
 }

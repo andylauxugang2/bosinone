@@ -9,7 +9,7 @@ import lombok.Data;
 @Data
 public class RangeModel {
     @JsonProperty(value = "Begin")
-    private int begin;
+    private Integer begin;
     @JsonProperty(value = "End")
-    private int end;
+    private Integer end;
 }

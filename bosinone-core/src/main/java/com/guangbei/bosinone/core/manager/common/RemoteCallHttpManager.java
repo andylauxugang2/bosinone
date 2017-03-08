@@ -57,6 +57,23 @@ public abstract class RemoteCallHttpManager {
         return result;
     }
 
+    protected <T> ResponseEntity<T> call(String url, String body, HttpMethod method, ParameterizedTypeReference<T> responseType, HttpHeaders headers, Object... uriVariables) throws Exception {
+        LocalDateTime startDateTime = LocalDateTime.now();
+        HttpEntity<String> httpEntity = new HttpEntity<>(body, headers);
+        ResponseEntity<T> result = getRestTemplate().exchange(url, method, httpEntity, responseType, uriVariables);
+        //埋点请求花费时间
+        LocalDateTime endDateTime = LocalDateTime.now();
+        logger.info("请求接口成功,耗时埋点:url={},times={}", url, Duration.between(startDateTime, endDateTime));
+        return result;
+    }
+
+    @Retryable(maxAttempts = 3, backoff = @Backoff(delay = 2000))
+    protected <T> ResponseEntity<T> callRetry(String url, String body, HttpMethod method, ParameterizedTypeReference<T> responseType, HttpHeaders headers, Object... uriVariables) throws Exception {
+        //抛出任何Exception都会重试，直到策略终止，调用recoveryCallback
+        ResponseEntity<T> result = retryTemplate.execute(context -> call(url, body, method, responseType, headers, uriVariables));
+        return result;
+    }
+
     /**
      * 获取resttemplate对象,根据子类设置为特定类型,比如notSSL的https和http等
      *

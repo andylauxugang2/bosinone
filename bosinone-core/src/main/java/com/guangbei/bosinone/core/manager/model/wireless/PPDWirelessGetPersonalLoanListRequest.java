@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.guangbei.bosinone.core.common.model.json.RangeModel;
 import lombok.Data;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -41,21 +42,21 @@ import java.util.List;
 @Data
 public class PPDWirelessGetPersonalLoanListRequest {
     @JsonProperty(value = "Months")
-    private List<RangeModel> months; //期限
+    private List<RangeModel> months = new ArrayList<>(2); //期限
     @JsonProperty(value = "BorrowCount")
-    private List<RangeModel> borrowCount; //成功借款次数
+    private List<RangeModel> borrowCount = new ArrayList<>(2); //成功借款次数
     @JsonProperty(value = "Rates")
-    private List<RangeModel> rates; //利率 %
+    private List<RangeModel> rates = new ArrayList<>(2); //利率 %
     @JsonProperty(value = "CreditCodes")
-    private List<String> creditCodes; //魔镜等级
+    private List<String> creditCodes = new ArrayList<>(2); //魔镜等级
     @JsonProperty(value = "LoanCategory")
     private int loanCategory; //风险等级
     @JsonProperty(value = "Amount")
-    private RangeModel amount; //借款金额
+    private RangeModel amount = new RangeModel(); //借款金额
     @JsonProperty(value = "ListTypes")
-    private List<Integer> listTypes; //列表类型 安标-1 赔标-2
+    private List<Integer> listTypes = new ArrayList<>(2); //列表类型 安标-1 赔标-2
     @JsonProperty(value = "AuthInfo")
-    private List<Integer> authInfo; //认证信息 学历-1 户籍-2 视频-3 人行征信-4
+    private List<Integer> authInfo = new ArrayList<>(2); //认证信息 学历-1 户籍-2 视频-3 人行征信-4
     @JsonProperty(value = "PageSize")
     private int pageSize; //每页大小
     @JsonProperty(value = "PageIndex")

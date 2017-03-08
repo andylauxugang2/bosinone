@@ -7,7 +7,9 @@ import org.springframework.web.client.RestTemplate;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by xugang on 17/1/9.
@@ -44,4 +46,23 @@ public class PPDRemoteCallHttpManagerWrapper extends RemoteCallHttpManager {
         return result;
     }
 
+    protected Map<String,String> getCookieMap(List<String> cookies) {
+        Map<String, String> result = new HashMap<>();
+        for(String cookie : cookies){
+            String entry = cookie.split(";")[0];
+            String[] arr = entry.split("=");
+            result.put(arr[0], arr[1]);
+        }
+        return result;
+    }
+
+    protected String getPpdUnameFromCookie(List<String> cookies) {
+        Map<String, String> cookieMap = getCookieMap(cookies);
+        return cookieMap.get("ppd_uname");
+    }
+
+    protected String getTokenFromCookie(List<String> cookies) {
+        Map<String, String> cookieMap = getCookieMap(cookies);
+        return cookieMap.get("token");
+    }
 }
