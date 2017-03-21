@@ -41,6 +41,9 @@ import java.util.List;
  */
 @Data
 public class PPDWirelessGetPersonalLoanListRequest {
+    public static final int PAGE_INDEX_START  = 1;
+    public static final int PAGE_SIZE_DEFAULT  = 20;
+
     @JsonProperty(value = "Months")
     private List<RangeModel> months = new ArrayList<>(2); //期限
     @JsonProperty(value = "BorrowCount")
@@ -61,5 +64,86 @@ public class PPDWirelessGetPersonalLoanListRequest {
     private int pageSize; //每页大小
     @JsonProperty(value = "PageIndex")
     private int pageIndex; //起始页
+
+    public enum LoanCategoryEnum {
+        LOW_RISK(8, "低风险"), MID_RISK(4, "中风险"), HIGH_RISK(5, "高风险"), UNKOWN(-999, "未知");
+        private int code;
+        private String desc;
+        LoanCategoryEnum(int code, String desc) {
+            this.code = code;
+            this.desc = desc;
+        }
+        public int getCode() {return code;}
+        public String getDesc() {return desc;}
+        public static LoanCategoryEnum getByCode(int code) {
+            for (LoanCategoryEnum item : LoanCategoryEnum.values()) {
+                if (item.getCode() == code) {
+                    return item;
+                }
+            }
+            return UNKOWN;
+        }
+    }
+
+    public enum CreditCodeEnum {
+        AAA("AAA", "魔镜等级AAA-安标"), AA("AA", "魔镜等级AA-赔标"), UNKOWN("-999", "未知");
+        private String code;
+        private String desc;
+        CreditCodeEnum(String code, String desc) {
+            this.code = code;
+            this.desc = desc;
+        }
+        public String getCode() {return code;}
+        public String getDesc() {return desc;}
+        public static CreditCodeEnum getByCode(String code) {
+            for (CreditCodeEnum item : CreditCodeEnum.values()) {
+                if (item.getCode().equalsIgnoreCase(code)) {
+                    return item;
+                }
+            }
+            return UNKOWN;
+        }
+    }
+
+    public enum ListTypeEnum {
+        AN(1, "安标"), PEI(2, "赔标"), PERSONAL_CREDIT(3, "个人信用标"), E_BUSS(4, "网商标"), UNKOWN(-999, "未知");
+        private int code;
+        private String desc;
+        ListTypeEnum(int code, String desc) {
+            this.code = code;
+            this.desc = desc;
+        }
+        public int getCode() {return code;}
+        public String getDesc() {return desc;}
+        public static ListTypeEnum getByCode(int code) {
+            for (ListTypeEnum item : ListTypeEnum.values()) {
+                if (item.getCode() == code) {
+                    return item;
+                }
+            }
+            return UNKOWN;
+        }
+    }
+
+    //认证信息 学历-1 户籍-2 视频-3 人行征信-4
+    public enum AuthInfoEnum {
+        EDU(1, "学历"), HOUSE(2, "户籍"),VIDEO(3, "视频"), BANK_CREDIT(4, "人行征信"), UNKOWN(-999, "未知");
+        private int code;
+        private String desc;
+        AuthInfoEnum(int code, String desc) {
+            this.code = code;
+            this.desc = desc;
+        }
+        public int getCode() {return code;}
+        public String getDesc() {return desc;}
+        public static AuthInfoEnum getByCode(int code) {
+            for (AuthInfoEnum item : AuthInfoEnum.values()) {
+                if (item.getCode() == code) {
+                    return item;
+                }
+            }
+            return UNKOWN;
+        }
+    }
 
 }
